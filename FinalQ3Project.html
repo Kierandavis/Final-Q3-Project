@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<center>
+<head>
+<h1>Greatest Green Grocer</h1>
+<style>
+h1,h2,h3 {
+color: white;
+font-family: "helvetica";
+}
+
+body {
+    background-image: url("https://chrisdedier.files.wordpress.com/2008/01/meridax-mas2007041.jpg");
+}
+</style>
+</head>
+<body>
+
+<script>
+	function Food(names, colors, expiration, ripe, number) {
+
+		this.names = names;
+		this.colors = colors;
+		this.expiration = expiration;
+		this.ripe = ripe;
+		this.number = number;
+	};
+
+	function Fruit(names, colors, expiration, ripe, number, texture) {
+		Food.call(this, names, colors, expiration, ripe, number);
+		this.texture = texture;
+	};
+
+	function Veg(names, colors, expiration, ripe, number, compliment, vitamins) {
+		Food.call(this, names, colors, expiration, ripe, number);
+		this.compliment = compliment;
+
+	};
+
+	Fruit.prototype = new Food();
+	Veg.prototype = new Food();
+
+	Fruit.prototype.price = 1.10;
+	Veg.prototype.price = .75;
+
+
+
+		var produce = [];
+		produce[0] = new Fruit("Banana", "yellow", 3/14, true, 10, "mushy");
+
+		produce[1] = new Fruit("Strawberry", "red", 4/14, true, 10, "mushy");
+
+		produce[2] = new Fruit("Apple", "Green", 4/10, true, 10, "hard");
+
+		produce[3] = new Veg("Rhubarb", "Green", 3/14, false, 10, "rice");
+
+		produce[4] = new Veg("Parsely", "Green", 4/14, false, 10, "chicken");
+
+		produce[5] = new Veg("Spinach", "Green", 3/25, false, 10, "chicken");
+
+
+
+
+	function actionUse () { 
+		var fruit = document.getElementById("fruit");
+		var amount = document.getElementById("amount");
+		console.log(amount.value);
+		amount = parseInt(amount.value);
+		console.log(amount);
+		fruit = fruit.value;
+		console.log("two",fruit);
+
+		var index = -1;
+		console.log("hello!",produce.length);
+		for(var i=0; i<produce.length; i++) {
+			console.log("hey",fruit, produce[i]);
+			if (fruit == produce[i].names) {
+				index = i;
+			}
+		}
+		console.log(fruit);
+		console.log(index);
+		var sign = Math.round((produce[index].price * amount) * 100) / 100;
+		window.alert("This will cost you " + sign + ". Have a nice day!");
+		for( var someParam in produce[0]) {
+			console.log(someParam);
+		}
+	} //this is the end of function actionUse
+
+
+
+
+
+	function actionUseVeg () { 
+		var veg = document.getElementById("veg");
+		var amount = document.getElementById("amount2");
+		console.log(amount.value);
+		amount = parseInt(amount.value);
+		console.log(amount);
+		veg = veg.value;
+		console.log("two",veg);
+
+		var index = -1;
+		console.log("hello!",produce.length);
+		for(var i=0; i<produce.length; i++) {
+			console.log("hey",veg, produce[i]);
+			if (veg == produce[i].names) {
+				index = i;
+			}
+		}
+		console.log(veg);
+		console.log(index);
+		console.log(produce[index].price);
+		var sign = produce[index].price * amount;
+
+		window.alert("This will cost you " + (Math.round(sign * 100) / 100) + ". Have a nice day!")
+		for( var someParam in produce[0]) {
+			console.log(someParam);
+		}
+	} //this is the end of function actionUseVeg
+
+</script>
+
+
+
+</form>
+<h3>Select Fruit/Quantity:</h3>
+<select name="type of fruit" form="form" id="fruit">
+		<option value="None"> </option>
+		<option value="Banana">Banana(s)</option>
+		<option value="Strawberry">Strawberry</option>
+		<option value="Apple">Apple(s)</option>
+</select>
+<select name="amount" form="form" id="amount">
+		<option value="None"> </option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+</select>
+<br><br>
+<form id="form" onsubmit="actionUse()">
+	<div style="position: fixed' top:300px; left: 300px">
+		<input type="submit">
+	</div>
+<br><br>
+
+
+<h3>Select Vegetable/Quantity:</h3>
+</form>
+
+<select name="type of Vegetable" form="form" id="veg">
+		<option value="None"> </option>
+		<option value="Rhubarb">Rhubarb</option>
+		<option value="Parsely">Parsely</option>
+		<option value="Spinach">Spinach</option>
+</select>
+<select name="amount" form="form" id="amount2">
+		<option value="None"> </option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+</select>
+<br><br>
+<form id="form" onsubmit="actionUseVeg()">
+	<div style="position: fixed' top:300px; left: 300px">
+		<input type="submit">
+	</div>
+
+</body>
+</center>
+</html>
